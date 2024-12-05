@@ -5,3 +5,6 @@
 #tasklist::-webkit-scrollbar {
   display: none;
 }
+* {
+  color: white;
+}

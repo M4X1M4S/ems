@@ -1,10 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 
-const Login = () => {
+const Login = ({handleLogin}) => {
+  
   function handleSubmit(e){
        e.preventDefault();
        console.log("Email: "+ email," Password: " +password)
+       handleLogin(email,password);
        setEmail('');
        setPassword('');
   }
@@ -13,7 +15,7 @@ const Login = () => {
 
 
   return (
-    <div className='flex h-screen w-screen items-center justify-center'>
+    <div className='flex h-screen w-screen items-center justify-center bg-[#000000]'>
 
       <div className='border-2 rounded-xl border-emerald-600 p-20 '>
 
