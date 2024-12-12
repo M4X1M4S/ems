@@ -13,6 +13,8 @@ const App = () => {
  const authData= useContext(AuthContext);
 console.log(authData);
 const [user, setUser] =useState('');
+const [userData, setUserData] = useState(null);
+
 useEffect(()=>{
   if(authData){
     localStorage.getItem('loggedInUser')
@@ -25,10 +27,15 @@ const handleLogin = (email,password) =>{
     console.log('This is ' + user);
     localStorage.setItem('loggedInUser',JSON.stringify({role:'admin'}));
   }
-  else if(authData && authData.employees.find((e)=>e.email===email && e.password===password)){
-    setUser('employee');
-    console.log('This is ' + user);
-    localStorage.setItem('loggedInUser',JSON.stringify({role:'employee'}));
+  else if(authData ){
+    const data = authData.employees.find((e)=>e.email===email && e.password===password)
+    if(data){
+      setUser('employee');
+      setUserData(data);
+      localStorage.setItem('loggedInUser',JSON.stringify({role:'employee'}));
+      
+    }
+   
   }
   else alert('Invalid credentails');
 
@@ -38,7 +45,7 @@ const handleLogin = (email,password) =>{
 
   return (
   <>{!user? <Login handleLogin={handleLogin}/> : ''}
-    {user==='admin'? <AdminDashboard/> : <EmployeeDashboard/>}
+    {user==='admin'? <AdminDashboard/> : <EmployeeDashboard data={userData}/>}
  
   {/* <EmployeeDashboard/> */}
   {/* <AdminDashboard/> */}
