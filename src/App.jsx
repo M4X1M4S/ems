@@ -10,19 +10,25 @@ const App = () => {
   //   setLocalStorage();
   //  getLocalStorage();
   // },)
+
  const authData= useContext(AuthContext);
-console.log(authData);
+
 const [user, setUser] =useState('');
-const [userData, setUserData] = useState(null);
+const [userData, setUserData] = useState('');
 
 useEffect(()=>{
-  if(authData){
-    localStorage.getItem('loggedInUser')
-  }
-},[authData]);
+const loggedInUser=localStorage.getItem('loggedInUser');
+if(loggedInUser){
+const data= JSON.parse(loggedInUser);
+setUser(data.role);
+setUserData(data.data);
+}
+},[])
+ 
 
 const handleLogin = (email,password) =>{
-  if(email=== 'admin@me.com' && password === '123'){
+  if(email=== 'admin@example.com' && password === '123'){
+   
     setUser('admin');
     console.log('This is ' + user);
     localStorage.setItem('loggedInUser',JSON.stringify({role:'admin'}));
@@ -30,14 +36,16 @@ const handleLogin = (email,password) =>{
   else if(authData ){
     const data = authData.employees.find((e)=>e.email===email && e.password===password)
     if(data){
+      console.log(data);
       setUser('employee');
       setUserData(data);
-      localStorage.setItem('loggedInUser',JSON.stringify({role:'employee'}));
+      localStorage.setItem('loggedInUser',JSON.stringify({role:'employee', data: data}));
       
     }
    
   }
   else alert('Invalid credentails');
+  
 
 }
 
@@ -45,7 +53,7 @@ const handleLogin = (email,password) =>{
 
   return (
   <>{!user? <Login handleLogin={handleLogin}/> : ''}
-    {user==='admin'? <AdminDashboard/> : <EmployeeDashboard data={userData}/>}
+    {user==='admin'? <AdminDashboard/> : user==='employee'? <EmployeeDashboard data={userData}/>:''}
  
   {/* <EmployeeDashboard/> */}
   {/* <AdminDashboard/> */}

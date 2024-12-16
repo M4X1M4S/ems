@@ -6,7 +6,10 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
   { ignores: ['dist'] },
-  {
+ {
+      
+  
+    
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -29,6 +32,9 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
+     
+        'react/prop-types': 'off', // Turn off the rule globally
+     
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
