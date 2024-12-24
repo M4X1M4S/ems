@@ -53,7 +53,7 @@ const handleLogin = (email,password) =>{
 
   return (
   <>{!user? <Login handleLogin={handleLogin}/> : ''}
-    {user==='admin'? <AdminDashboard/> : user==='employee'? <EmployeeDashboard data={userData}/>:''}
+    {user==='admin'? <AdminDashboard /> : user==='employee'? <EmployeeDashboard data={userData}/>:''}
  
   {/* <EmployeeDashboard/> */}
   {/* <AdminDashboard/> */}

@@ -4,6 +4,7 @@ import TaskListNumber from '../others/TaskListNumber';
 import TaskList from '../TaskList/TaskList';
 
 const EmployeeDashboard = ({data}) => {
+  console.log('hi')
   console.log(data);
  
   return (
@@ -11,6 +12,7 @@ const EmployeeDashboard = ({data}) => {
    <Header data={data}/>
    <TaskListNumber  data={data}/>
    <TaskList  data={data}/>
+   
    </div>
   )
 }
